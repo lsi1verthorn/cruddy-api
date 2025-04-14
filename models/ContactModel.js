@@ -2,14 +2,13 @@ const { Model, DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
-  class Job extends Model {
+  class Contact extends Model {
     static associate(models) {
-      // Define associations here
-      Job.belongsTo(models.Company, { foreignKey: 'company_id' });
+      // Define associations here (if any)
     }
   }
 
-  Job.init(
+  Contact.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -17,42 +16,34 @@ module.exports = (sequelize) => {
         allowNull: false,
         autoIncrement: true, // Add autoIncrement if it's an auto-incrementing PK
       },
-      title: {
+      name: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      description: {
+      email: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultValue: '',
+        validate: {
+          isEmail: true,
+        },
       },
-      remote: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
-      },
-      salary_range: {
+      country_code: {
         type: DataTypes.TEXT,
         allowNull: true,
-        defaultValue: '???',
+        default: '+1',
       },
-      comments: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-        defaultValue: '',
-      },
-      company_id: {
-        type: DataTypes.INTEGER,
+      phone: {
+        type: DatatTypes.DECIMAL(10,0),
         allowNull: true,
       },
     },
     {
       sequelize,
-      modelName: 'Job',
-      tableName: 'job',
+      modelName: 'Contact',
+      tableName: 'contact',
       timestamps: true,
     }
   );
 
-  return Job;
+  return Contact;
 };
