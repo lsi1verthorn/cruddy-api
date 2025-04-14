@@ -8,8 +8,6 @@ router.post('/', async (req, res) => {
 
     res.status(201).json(newContact);
   } catch (err) {
-    console.error('Error creating the contact: ', err);
-
     res.status(500).json({ error: 'Failed to create the contact ', message: err.message });
   }
 });
@@ -24,8 +22,6 @@ router.get('/:id', async (req, res) => {
 
     res.json(contact);
   } catch (err) {
-    console.error('Error fetching the contact: ', err);
-
     res.status(500).json({ error: 'Failed to fetch the contact ', message: err.message });
   }
 });
@@ -40,8 +36,6 @@ router.put('/:id', async (req, res) => {
 
     res.json(updatedContact);
   } catch (err) {
-    console.error('Error updating the contact: ', err);
-
     res.status(500).json({ error: 'Failed to update the contact ', message: err.message });
   }
 });
@@ -54,10 +48,8 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Contact not found' });
     }
 
-    res.json(deletedUser);
+    res.json(deletedContact);
   } catch (err) {
-    console.error('Error deleting the contact: ', err);
-
     res.status(500).json({ error: 'Failed to delete the contact ', message: err.message });
   }
 });
@@ -68,8 +60,6 @@ router.get('/', async (req, res) => {
 
     res.json(contacts);
   } catch(err){
-    console.error('Error getting the list of contacts: ', err);
-
     res.status(500).json({error: 'Failed to list the contacts'});
   }
 });

@@ -8,8 +8,6 @@ router.post('/', async (req, res) => {
 
     res.status(201).json(newApplication);
   } catch (err) {
-    console.error('Error creating the application: ', err);
-
     res.status(500).json({ error: 'Failed to create the application ', message: err.message });
   }
 });
@@ -24,8 +22,6 @@ router.get('/:id', async (req, res) => {
 
     res.json(application);
   } catch (err) {
-    console.error('Error fetching the application: ', err);
-
     res.status(500).json({ error: 'Failed to fetch the application ', message: err.message });
   }
 });
@@ -40,8 +36,6 @@ router.put('/:id', async (req, res) => {
 
     res.json(updatedApplication);
   } catch (err) {
-    console.error('Error updating the application: ', err);
-
     res.status(500).json({ error: 'Failed to update the application ', message: err.message });
   }
 });
@@ -54,10 +48,8 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Application not found' });
     }
 
-    res.json(deletedUser);
+    res.json(deletedApplication);
   } catch (err) {
-    console.error('Error deleting the application: ', err);
-
     res.status(500).json({ error: 'Failed to delete the application ', message: err.message });
   }
 });
@@ -68,8 +60,6 @@ router.get('/', async (req, res) => {
 
     res.json(applications);
   } catch(err){
-    console.error('Error getting the list of applications: ', err);
-
     res.status(500).json({error: 'Failed to list the applications'});
   }
 });

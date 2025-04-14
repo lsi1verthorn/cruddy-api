@@ -8,8 +8,6 @@ router.post('/', async (req, res) => {
 
     res.status(201).json(newCompany);
   } catch (err) {
-    console.error('Error creating the company: ', err);
-
     res.status(500).json({ error: 'Failed to create the company ', message: err.message });
   }
 });
@@ -24,8 +22,6 @@ router.get('/:id', async (req, res) => {
 
     res.json(company);
   } catch (err) {
-    console.error('Error fetching the company: ', err);
-
     res.status(500).json({ error: 'Failed to fetch the company ', message: err.message });
   }
 });
@@ -40,8 +36,6 @@ router.put('/:id', async (req, res) => {
 
     res.json(updatedCompany);
   } catch (err) {
-    console.error('Error updating the company: ', err);
-
     res.status(500).json({ error: 'Failed to update the company ', message: err.message });
   }
 });
@@ -54,10 +48,8 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Company not found' });
     }
 
-    res.json(deletedUser);
+    res.json(deletedCompany);
   } catch (err) {
-    console.error('Error deleting the company: ', err);
-
     res.status(500).json({ error: 'Failed to delete the company ', message: err.message });
   }
 });
@@ -68,8 +60,6 @@ router.get('/', async (req, res) => {
 
     res.json(companies);
   } catch(err){
-    console.error('Error getting the list of companies: ', err);
-
     res.status(500).json({error: 'Failed to list the companies'});
   }
 });
