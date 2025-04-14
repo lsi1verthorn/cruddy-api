@@ -5,14 +5,14 @@ describe('Contact Model', () => {
   let Contact;
   let sequelize;
 
-  beforeAll(() => {
+  beforeEach(() => {
     sequelize = new Sequelize('sqlite::memory:', { logging: false });
     Contact = contactModel(sequelize);
 
     return sequelize.sync({ force: true });
   });
 
-  afterAll(() => {
+  afterEach(() => {
     return sequelize.close();
   });
 

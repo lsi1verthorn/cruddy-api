@@ -6,7 +6,7 @@ describe('Job Model', () => {
   let Job;
   let sequelize;
 
-  beforeAll(() => {
+  beforeEach(() => {
     sequelize = new Sequelize('sqlite::memory:', { logging: false }); // Use in-memory SQLite for testing
 
     // Mock Company model
@@ -31,7 +31,7 @@ describe('Job Model', () => {
     return sequelize.sync({ force: true }); // Sync the models to the database
   });
 
-  afterAll(() => {
+  afterEach(() => {
     return sequelize.close();
   });
 
