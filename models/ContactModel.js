@@ -30,10 +30,10 @@ module.exports = (sequelize) => {
       country_code: {
         type: DataTypes.TEXT,
         allowNull: true,
-        default: '+1',
+        defaultValue: '+1',
       },
       phone: {
-        type: DatatTypes.DECIMAL(10,0),
+        type: DataTypes.DECIMAL(10,0),
         allowNull: true,
       },
     },

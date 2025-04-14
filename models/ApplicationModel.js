@@ -8,6 +8,18 @@ module.exports = (sequelize) => {
       Application.belongsTo(models.Job, { foreignKey: 'job_id' });
       Application.belongsTo(models.Contact, { foreignKey: 'contact_id' });
     }
+
+    getCompanyId() {
+      return this.company_id;
+    }
+
+    getContactId() {
+      return this.contact_id;
+    }
+
+    getJobId() {
+      return this.job_id;
+    }
   }
 
   Application.init(
