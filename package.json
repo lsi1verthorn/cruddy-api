@@ -6,7 +6,8 @@
   "scripts": {
     "build": "pnpm install",
     "dev": "node app.js",
-    "test": "jest --testMatch \"**/*.test.[jt]s\""
+    "test": "jest --testMatch \"**/*.test.[jt]s\"",
+    "test:app": "mocha __tests__/app.test.js"
   },
   "keywords": [
     "CRUD api",
@@ -16,9 +17,11 @@
   "author": "Linda Silverthorn",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.8.4",
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "jest": "^29.7.0",
+    "mocha": "^11.1.0",
     "pg": "^8.14.1",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7",
