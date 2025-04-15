@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS job_tracker.application
         REFERENCES job_tracker.job (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    CONSTRAINT status_chk CHECK (status = ANY (ARRAY['Applied'::text, 'Callback'::text, 'CodingAssignment'::text, 'Declined'::text, 'Ghosted'::text, 'Interview 1'::text, 'Interview 2'::text, 'Interview 3'::text, 'Rejected'::text]))
+    CONSTRAINT status_chk CHECK (status = ANY (ARRAY['Applied'::text, 'Callback'::text, 'CodingAssignment'::text, 'Declined'::text, 'Ghosted'::text, 'Interview 1'::text, 'Interview 2'::text, 'Interview 3'::text, 'Rejected'::text, 'Withdrawn'::text]))
 )
 
 TABLESPACE pg_default;

@@ -52,7 +52,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
-          isIn: [['Applied', 'Callback', 'CodingAssignment', 'Ghosted', 'Interview 1', 'Interview 2', 'Interview 3', 'Rejected']],
+          isIn: [['Applied', 'Callback', 'CodingAssignment', 'Declined', 'Ghosted', 'Interview 1', 'Interview 2', 'Interview 3', 'Rejected', 'Withdrawn']],
         },
       },
       rejection_date: {
