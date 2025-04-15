@@ -25,6 +25,7 @@ let server;
 describe('Express API Tests', () => {
   before((done) => {
     server = app.listen(port, () => {
+      // eslint-disable-next-line no-console
       console.log(`    Test server listening at http://localhost:${port}`);
       done();
     });
