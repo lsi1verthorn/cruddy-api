@@ -52,7 +52,9 @@ async function remove(table, id) {
   return result.rows[0];
 }
 
+// @todo Error handling
 async function list(table) {
+  debugger;
   const queryText = `SELECT * FROM ${table}`;
   const result = await query(queryText, []);
   return result.rows;
