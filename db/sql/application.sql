@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS job_tracker.application
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     application_date date NOT NULL,
     referral boolean NOT NULL DEFAULT false,
-    referred_by text COLLATE pg_catalog."default" DEFAULT ''::text,
+    referred_by text COLLATE pg_catalog."default",
     contacted boolean NOT NULL DEFAULT false,
     status text COLLATE pg_catalog."default" NOT NULL,
     rejection_date date,

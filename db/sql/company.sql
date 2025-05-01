@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS job_tracker.company
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     name text COLLATE pg_catalog."default" NOT NULL DEFAULT ''::text,
-    website text COLLATE pg_catalog."default" DEFAULT ''::text,
+    website text COLLATE pg_catalog."default",
     CONSTRAINT "Company_pkey" PRIMARY KEY (id),
     CONSTRAINT company_uniq_id UNIQUE (id),
     CONSTRAINT website_chk CHECK (website ~* '^(http|https)://[a-zA-Z0-9. -]+\.[a-zA-Z]{2,}$'::text)

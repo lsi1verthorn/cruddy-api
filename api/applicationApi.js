@@ -54,9 +54,34 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// @todo Obviously need to figure out something better than this with typing
 router.get('/', async (req, res) => {
+  const data = [
+    'application.id',
+    'application.application_date',
+    'application.referral',
+    'application.referred_by',
+    'application.contacted',
+    'application.status',
+    'application.rejection_date',
+    'application.comments',
+    'application.cover_letter',
+    'application.company_id',
+    'application.contact_id',
+    'application.job_id',
+    'contact.contact_name',
+    'contact.contact_email',
+    'company.name',
+    'job.title',
+  ];
+  const fk = [
+    { table: 'application', pk: 'id', fk: 'company_id', relatedTable: 'company' },
+    { table: 'application', pk: 'id', fk: 'contact_id', relatedTable: 'contact' },
+    { table: 'application', pk: 'id', fk: 'job_id', relatedTable: 'job' },
+  ];
+
   try {
-    const applications = await db.list('application');
+    const applications = await db.innerjoin('application', data, fk);
 
     res.json(applications);
   } catch(err){

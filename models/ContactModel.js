@@ -16,11 +16,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         autoIncrement: true, // Add autoIncrement if it's an auto-incrementing PK
       },
-      name: {
+      contact_name: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      email: {
+      contact_email: {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {

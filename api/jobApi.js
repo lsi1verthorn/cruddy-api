@@ -54,9 +54,24 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// @todo Obviously need to figure out something better than this with typing
 router.get('/', async (req, res) => {
+  const data = [
+    'job.id',
+    'job.title',
+    'job.description',
+    'job.remote',
+    'job.salary_range',
+    'job.comments',
+    'job.company_id',
+    'company.name',
+  ];
+  const fk = [
+    { table: 'job', pk: 'id', fk: 'company_id', relatedTable: 'company' },
+  ];
+
   try {
-    const jobs = await db.list('job');
+    const jobs = await db.innerjoin('job', data, fk);
 
     res.json(jobs);
   } catch(err){
