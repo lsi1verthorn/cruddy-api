@@ -64,7 +64,7 @@ router.get('/', async (req, res) => {
     'job.salary_range',
     'job.comments',
     'job.company_id',
-    'company.name',
+    'company.company_name',
   ];
   const fk = [
     { table: 'job', pk: 'id', fk: 'company_id', relatedTable: 'company' },

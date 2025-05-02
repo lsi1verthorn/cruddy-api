@@ -156,7 +156,7 @@ describe('Job Routes', () => {
           'job.salary_range',
           'job.comments',
           'job.company_id',
-          'company.name',
+          'company.company_name',
         ],
         [
           {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'company', 'table': 'job'}
