@@ -71,7 +71,7 @@ router.get('/', async (req, res) => {
     'application.job_id',
     'contact.contact_name',
     'contact.contact_email',
-    'company.name',
+    'company.company_name',
     'job.title',
   ];
   const fk = [

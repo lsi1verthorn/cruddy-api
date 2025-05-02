@@ -55,7 +55,7 @@ describe('Express API Tests', () => {
       res.status(200).send('Contact Test OK');
     });
 
-      mockJobApi.delete('/test', (req, res) => {
+    mockJobApi.delete('/test', (req, res) => {
       res.status(200).send('Job Test OK');
     });
 

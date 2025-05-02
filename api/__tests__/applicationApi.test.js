@@ -141,18 +141,42 @@ describe('Application Routes', () => {
   describe('GET /', () => {
     it('should return a list of applications', async () => {
       const applications = [{ id: 1, application_date: '2023-10-26' }, { id: 2, application_date: '2023-10-27' }];
-      db.list.mockResolvedValue(applications);
+      db.innerjoin.mockResolvedValue(applications);
 
       const response = await request(app).get('/');
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(applications);
-      expect(db.list).toHaveBeenCalledWith('application');
+      expect(db.innerjoin).toHaveBeenCalledWith('application',
+        [
+          'application.id',
+          'application.application_date',
+          'application.referral',
+          'application.referred_by',
+          'application.contacted',
+          'application.status',
+          'application.rejection_date',
+          'application.comments',
+          'application.cover_letter',
+          'application.company_id',
+          'application.contact_id',
+          'application.job_id',
+          'contact.contact_name',
+          'contact.contact_email',
+          'company.company_name',
+          'job.title',
+        ],
+        [
+          {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'company', 'table': 'application'},
+          {'fk': 'contact_id', 'pk': 'id', 'relatedTable': 'contact', 'table': 'application'},
+          {'fk': 'job_id', 'pk': 'id', 'relatedTable': 'job', 'table': 'application'}
+        ],
+      );
     });
 
     it('should handle errors during application listing', async () => {
       const errorMessage = 'Database error';
-      db.list.mockRejectedValue(new Error(errorMessage));
+      db.innerjoin.mockRejectedValue(new Error(errorMessage));
 
       const response = await request(app).get('/');
 

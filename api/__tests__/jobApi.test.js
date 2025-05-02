@@ -141,18 +141,32 @@ describe('Job Routes', () => {
   describe('GET /', () => {
     it('should return a list of jobs', async () => {
       const jobs = [{ id: 1, title: 'Software Engineer' }, { id: 2, title: 'Data Scientist' }];
-      db.list.mockResolvedValue(jobs);
+      db.innerjoin.mockResolvedValue(jobs);
 
       const response = await request(app).get('/');
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(jobs);
-      expect(db.list).toHaveBeenCalledWith('job');
+      expect(db.innerjoin).toHaveBeenCalledWith('job',
+        [
+          'job.id',
+          'job.title',
+          'job.description',
+          'job.remote',
+          'job.salary_range',
+          'job.comments',
+          'job.company_id',
+          'company.name',
+        ],
+        [
+          {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'company', 'table': 'job'}
+        ],
+      );
     });
 
     it('should handle errors during job listing', async () => {
       const errorMessage = 'Database error';
-      db.list.mockRejectedValue(new Error(errorMessage));
+      db.innerjoin.mockRejectedValue(new Error(errorMessage));
 
       const response = await request(app).get('/');
 

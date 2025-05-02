@@ -14,12 +14,12 @@ module.exports = (sequelize) => {
         allowNull: false,
         autoIncrement: true, // Add autoIncrement if it's an auto-incrementing PK
       },
-      name: {
+      company_name: {
         type: DataTypes.TEXT,
         allowNull: false,
         defaultValue: '',
       },
-      website: {
+      company_website: {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: {
