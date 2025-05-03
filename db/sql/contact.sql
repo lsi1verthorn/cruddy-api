@@ -20,6 +20,9 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS job_tracker.contact
     OWNER to postgres;
 
+ALTER TABLE IF EXISTS job_tracker.contact
+    ADD CONSTRAINT contact_name_unique UNIQUE (contact_name);
+
 COMMENT ON TABLE job_tracker.contact
     IS 'Company contact information - may be an HR recruiter for the company or an independent recruiter';
 

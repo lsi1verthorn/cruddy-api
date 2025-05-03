@@ -18,7 +18,7 @@ ALTER TABLE IF EXISTS job_tracker.company
     OWNER to postgres;
 
 ALTER TABLE IF EXISTS job_tracker.company
-    ADD CONSTRAINT name_unique UNIQUE (company_name)
+    ADD CONSTRAINT company_name_unique UNIQUE (company_name);
 
 COMMENT ON TABLE job_tracker.company
     IS 'Information about the company with the job opening';
