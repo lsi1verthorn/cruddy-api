@@ -69,14 +69,11 @@ router.get('/', async (req, res) => {
     'application.company_id',
     'application.contact_id',
     'application.job_id',
-    'contact.contact_name',
-    'contact.contact_email',
     'company.company_name',
     'job.title',
   ];
   const fk = [
     { table: 'application', pk: 'id', fk: 'company_id', relatedTable: 'company' },
-    { table: 'application', pk: 'id', fk: 'contact_id', relatedTable: 'contact' },
     { table: 'application', pk: 'id', fk: 'job_id', relatedTable: 'job' },
   ];
 

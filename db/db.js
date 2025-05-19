@@ -17,7 +17,6 @@ const pool = new Pool({
 async function query(text, params) {
   const client = await pool.connect();
   try {
-    debugger;
     const res = await client.query(text, params);
     return res;
   } finally {
@@ -72,6 +71,7 @@ async function list(table) {
 }
 
 // @todo Need a better way to handle this?
+// @todo this only returns all rows when all the keys exist
 async function innerjoin(table, data, fkArray) {
   const fields = data.join(', ');
   const joins = fkArray.reduce((acc, value) => {

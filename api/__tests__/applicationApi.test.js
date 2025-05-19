@@ -161,14 +161,11 @@ describe('Application Routes', () => {
           'application.company_id',
           'application.contact_id',
           'application.job_id',
-          'contact.contact_name',
-          'contact.contact_email',
           'company.company_name',
           'job.title',
         ],
         [
           {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'company', 'table': 'application'},
-          {'fk': 'contact_id', 'pk': 'id', 'relatedTable': 'contact', 'table': 'application'},
           {'fk': 'job_id', 'pk': 'id', 'relatedTable': 'job', 'table': 'application'}
         ],
       );
