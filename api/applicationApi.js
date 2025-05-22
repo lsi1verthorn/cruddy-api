@@ -26,6 +26,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// @todo Is this really a PATCH?
 router.put('/:id', async (req, res) => {
   try {
     const updatedApplication = await db.update('application', req.params.id, req.body);
