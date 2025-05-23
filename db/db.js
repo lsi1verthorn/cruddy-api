@@ -70,8 +70,7 @@ async function list(table) {
   return result.rows;
 }
 
-// @todo Need a better way to handle this?
-// @todo this only returns all rows when all the keys exist
+// @todo This only returns all rows if all the keys exist
 async function innerjoin(table, data, fkArray) {
   const fields = data.join(', ');
   const joins = fkArray.reduce((acc, value) => {

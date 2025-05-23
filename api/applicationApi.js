@@ -26,8 +26,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// @todo Is this really a PATCH?
-router.put('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const updatedApplication = await db.update('application', req.params.id, req.body);
 
@@ -55,7 +54,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// @todo Obviously need to figure out something better than this with typing
+// @todo This doesn't return the contact information because that FK is optional and
+// doesn't work with the innerjoin implementation
 router.get('/', async (req, res) => {
   const data = [
     'application.id',
