@@ -74,12 +74,12 @@ describe('Application Routes', () => {
     });
   });
 
-  describe('PUT /:id', () => {
+  describe('PATCH /:id', () => {
     it('should update an application', async () => {
       const updatedApplication = { id: 1, application_date: '2023-10-27' };
       db.update.mockResolvedValue(updatedApplication);
 
-      const response = await request(app).put('/1').send({ application_date: '2023-10-27' });
+      const response = await request(app).patch('/1').send({ application_date: '2023-10-27' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(updatedApplication);
@@ -89,7 +89,7 @@ describe('Application Routes', () => {
     it('should return 404 if application not found during update', async () => {
       db.update.mockResolvedValue(null);
 
-      const response = await request(app).put('/1').send({ application_date: '2023-10-27' });
+      const response = await request(app).patch('/1').send({ application_date: '2023-10-27' });
 
       expect(response.status).toBe(404);
       expect(response.body).toEqual({ error: 'Application not found' });
@@ -99,7 +99,7 @@ describe('Application Routes', () => {
       const errorMessage = 'Database error';
       db.update.mockRejectedValue(new Error(errorMessage));
 
-      const response = await request(app).put('/1').send({ application_date: '2023-10-27' });
+      const response = await request(app).patch('/1').send({ application_date: '2023-10-27' });
 
       expect(response.status).toBe(500);
       expect(response.body).toEqual({ error: 'Failed to update the application ', message: errorMessage });
