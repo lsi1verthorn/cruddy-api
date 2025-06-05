@@ -6,7 +6,12 @@ describe('Company Model', () => {
   let Company;
 
   beforeEach(() => {
-    sequelize = new Sequelize('sqlite::memory:', { logging: false });
+    // Use in-memory SQLite for testing
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ':memory:',
+      logging: false
+    });
     Company = companyModel(sequelize);
 
     return sequelize.sync({ force: true });

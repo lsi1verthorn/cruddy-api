@@ -7,7 +7,12 @@ describe('Job Model', () => {
   let sequelize;
 
   beforeEach(() => {
-    sequelize = new Sequelize('sqlite::memory:', { logging: false }); // Use in-memory SQLite for testing
+    // Use in-memory SQLite for testing
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ':memory:',
+      logging: false
+    });
 
     // Mock Company model
     Company = sequelize.define('Company', {

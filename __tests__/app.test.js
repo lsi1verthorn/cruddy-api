@@ -1,92 +1,118 @@
-const assert = require('assert');
-const axios = require('axios');
+const request = require('supertest');
+const { expect } = require('chai');
 const express = require('express');
-const bodyParser = require('body-parser');
 
-// Mock API modules for testing
-const mockApplicationApi = express.Router();
-const mockCompanyApi = express.Router();
-const mockContactApi = express.Router();
-const mockJobApi = express.Router();
+const applicationApi = require('../api/applicationApi');
+const companyApi = require('../api/companyApi');
+const contactApi = require('../api/contactApi');
+const jobApi = require('../api/jobApi');
 
-const app = express();
-const port = 3001; // Use a different port for testing to avoid conflicts
+describe('Express Application', () => {
+  let app;
 
-app.use(bodyParser.json());
+  before(() => {
+    // Before all tests, create a new Express app instance
+    // This ensures a clean slate for each test run
+    app = express();
+    app.use(express.json());
 
-// Mount the mock endpoints
-app.use('/application', mockApplicationApi);
-app.use('/company', mockCompanyApi);
-app.use('/contact', mockContactApi);
-app.use('/job', mockJobApi);
+    // Replicate CORS setup for testing
+    const allowedOriginRegex = /^https?:\/\/localhost:51.*$/;
 
-let server;
+    const corsOptions = {
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      origin: function (origin, callback) {
+        if (allowedOriginRegex.test(origin) || !origin) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+    };
 
-describe('Express API Tests', () => {
-  before((done) => {
-    server = app.listen(port, () => {
-      // eslint-disable-next-line no-console
-      console.log(`    Test server listening at http://localhost:${port}`);
-      done();
-    });
+    const cors = require('cors');
+    app.use(cors(corsOptions));
+
+    /**
+     * @type {import('express').ErrorRequestHandler}
+     */
+    const errorHandler = (err, req, res, next) => {
+      if (err.message === 'Not allowed by CORS') {
+        res.status(403).send('Forbidden: Not allowed by CORS policy.');
+      } else {
+        next(err);
+      }
+    };
+    app.use(errorHandler);
+
+    // Mount API route
+    app.use('/application', applicationApi);
+    app.use('/company', companyApi);
+    app.use('/contact', contactApi);
+    app.use('/job', jobApi);
   });
 
-  after((done) => {
-    server.close(done);
+  // Test Case 1: Check if the server responds to a basic GET request to a non-existent route
+  it('should return 404 for an unknown route', (done) => {
+    request(app)
+      .get('/nonexistent-route')
+      .expect(404)
+      .end(done);
   });
 
-  it('should parse JSON requests using body-parser', async () => {
-    mockApplicationApi.post('/', (req, res) => {
-      assert.deepStrictEqual(req.body, { test: 'data' });
-      res.status(200).send('OK');
-    });
-
-    const response = await axios.post(`http://localhost:${port}/application`, { test: 'data' });
-    assert.strictEqual(response.status, 200);
-    assert.strictEqual(response.data, 'OK');
+  // Test Case 2: Test CORS for an allowed origin
+  it('should allow requests from an allowed origin (CORS)', (done) => {
+    request(app)
+      .get('/application')
+      .set('Origin', 'https://localhost:5173')
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.header['access-control-allow-origin']).to.equal('https://localhost:5173');
+        done();
+      });
   });
 
-  it('should handle different API endpoints', async () => {
-    mockCompanyApi.get('/test', (req, res) => {
-      res.status(200).send('Company Test OK');
-    });
-
-    mockContactApi.put('/test', (req, res) => {
-      res.status(200).send('Contact Test OK');
-    });
-
-    mockJobApi.delete('/test', (req, res) => {
-      res.status(200).send('Job Test OK');
-    });
-
-    const companyResponse = await axios.get(`http://localhost:${port}/company/test`);
-    assert.strictEqual(companyResponse.status, 200);
-    assert.strictEqual(companyResponse.data, 'Company Test OK');
-
-    const contactResponse = await axios.put(`http://localhost:${port}/contact/test`);
-    assert.strictEqual(contactResponse.status, 200);
-    assert.strictEqual(contactResponse.data, 'Contact Test OK');
-
-    const jobResponse = await axios.delete(`http://localhost:${port}/job/test`);
-    assert.strictEqual(jobResponse.status, 200);
-    assert.strictEqual(jobResponse.data, 'Job Test OK');
-
+  // Test Case 3: Test CORS for a disallowed origin
+  it('should disallow requests from a disallowed origin (CORS)', (done) => {
+    request(app)
+      .get('/job')
+      .set('Origin', 'https://www.bad-domain.com')
+      .end((err, res) => {
+        if (res.header['access-control-allow-origin']) {
+          return done(new Error('CORS header found for disallowed origin'));
+        }
+        expect(res.status).to.be.oneOf([403, 404]);
+        done();
+      });
   });
 
-  it('should handle multiple requests to different routes', async () => {
-    mockCompanyApi.post('/multiple', (req, res) => {
-        res.status(200).send("multiple company");
-    });
-    mockContactApi.post('/multiple', (req, res) => {
-        res.status(200).send("multiple contact");
-    });
+  // Test Case 4: Verify if a specific API route is mounted and responds
+  it('should have the /application route mounted', (done) => {
+    request(app)
+      .get('/application/')
+      .expect(200)
+      .end(done);
+  });
 
-    const companyResponse = await axios.post(`http://localhost:${port}/company/multiple`);
-    assert.strictEqual(companyResponse.status, 200);
-    assert.strictEqual(companyResponse.data, 'multiple company');
+  it('should have the /company route mounted', (done) => {
+    request(app)
+      .get('/company/')
+      .expect(200)
+      .end(done);
+  });
 
-    const contactResponse = await axios.post(`http://localhost:${port}/contact/multiple`);
-    assert.strictEqual(contactResponse.status, 200);
-    assert.strictEqual(contactResponse.data, 'multiple contact');
+  it('should have the /contact route mounted', (done) => {
+    request(app)
+      .get('/contact/')
+      .expect(200)
+      .end(done);
+  });
+
+  it('should have the /job route mounted', (done) => {
+    request(app)
+      .get('/job/')
+      .expect(200)
+      .end(done);
   });
 });

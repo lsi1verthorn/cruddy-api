@@ -54,7 +54,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// @todo Obviously need to figure out something better than this with typing
+// @todo Is there a better way to do this with typing or something?
 router.get('/', async (req, res) => {
   const data = [
     'job.id',

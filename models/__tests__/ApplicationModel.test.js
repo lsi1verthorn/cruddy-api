@@ -10,7 +10,12 @@ describe('Application Model', () => {
   let sequelize;
 
   beforeEach(() => {
-    sequelize = new Sequelize('sqlite::memory:', { logging: false });
+    // Use in-memory SQLite for testing
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ':memory:',
+      logging: false
+    });
 
     // Mock models for associations
     Company = sequelize.define('Company', { id: { type: DataTypes.INTEGER, primaryKey: true }, name: DataTypes.TEXT });

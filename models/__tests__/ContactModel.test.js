@@ -6,7 +6,12 @@ describe('Contact Model', () => {
   let sequelize;
 
   beforeEach(() => {
-    sequelize = new Sequelize('sqlite::memory:', { logging: false });
+    // Use in-memory SQLite for testing
+    sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: ':memory:',
+      logging: false
+    });
     Contact = contactModel(sequelize);
 
     return sequelize.sync({ force: true });

@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
 
@@ -10,8 +9,7 @@ const jobApi = require('./api/jobApi');
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
-
+app.use(express.json());
 
 // Enable CORS for specific origins
 // Allow connection requests from localhost:51*
