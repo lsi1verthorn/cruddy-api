@@ -36,20 +36,24 @@ node inspect app.js
 ### Unit Tests
 From the top level directory
 ```bash
+# Run all unit tests
 pnpm run test
+```
+```bash
+# Run just the `mocha` tests
+pnpm run test:mocha-app
+```
+```bash
+# Run just the `jest` tests
+pnpm run test:jest-rest
 ```
 
 ## Improvements | Issues | Known Bugs
-This is a list of items that I would like to do if time permits:
+This is a list of items that I would like to complete as time permits:
 
-[#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Implement test data for the api so that my UI projects can be run standalone without having a local db.
+- [#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Add Test Data
+- [#2](https://github.com/lsi1verthorn/cruddy-api/issues/2) Update DB Schema
+- [#3](https://github.com/lsi1verthorn/cruddy-api/issues/3) Spike: Query response data
+- [#4](https://github.com/lsi1verthorn/cruddy-api/issues/4) DRY out / refactor as applicable
+- [#5](https://github.com/lsi1verthorn/cruddy-api/issues/5) Additional documentation
 
-[#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Trigger test data usage via an environment variable or a `pnpm run` command
-- [ ] Make sure that the postgres schema sql files are up-to-date and reflect the tables, columns,
-indices, and validations that are defined.
-- [ ] Would it be more correct to return query data in `response.data` as opposed to `response` like in this basic work?
-- [ ] Is there any need to provide documentation on how to `grpCurl` against this api?
-- [ ] Can this/should this be refactored to reduce code duplication?
-  - [ ] Centralized error handling via custom middleware for async errors
-  - [ ] Router factories / generic CRUD routers
-  - [ ] TypeScript for type safety and better tooling ("Typing")
