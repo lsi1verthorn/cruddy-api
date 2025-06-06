@@ -44,8 +44,8 @@ This is a list of items that I would like to do if time permits:
 
 - [ ] Make sure that the postgres schema sql files are up-to-date and reflect the tables, columns,
 indices, and validations that are defined.
-- [ ] Implement test data for the api so that my UI projects can be run standalone without having a local db.
-- [ ] Trigger ^^^ test data via an environment variable or a `pnpm run` command
+- [ ] [#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Implement test data for the api so that my UI projects can be run standalone without having a local db.
+- [ ] [#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Trigger test data usage via an environment variable or a `pnpm run` command
 - [ ] Would it be more correct to return query data in `response.data` as opposed to `response` like in this basic work?
 - [ ] Is there any need to provide documentation on how to `grpCurl` against this api?
 - [ ] Can this/should this be refactored to reduce code duplication?
