@@ -2,7 +2,7 @@
 Basic CRUD API for rudimentary postgres db
 
 ## Description
-This is a very basic `express` api to access a small `postgres` db locally where job search
+This is a very basic `express` app for accessing a small `postgres` db locally where job search
 applications and related information are stored. This is by no-means meant to
 be a complete api, and it lacks some fundamentals like robust error checking and performance tuning.
 
