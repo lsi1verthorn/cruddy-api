@@ -20,7 +20,7 @@ pnpm install
 pnpm run build
 ```
 
-### Running the service on port 3001
+### Running the service on port 3000
 ```bash
 pnpm run dev
 ```
