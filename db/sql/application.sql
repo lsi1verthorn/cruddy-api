@@ -1,37 +1,34 @@
--- Table: job_tracker.application
+-- job_tracker.application definition
 
--- DROP TABLE IF EXISTS job_tracker.application;
+-- Drop table
 
-CREATE TABLE IF NOT EXISTS job_tracker.application
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    application_date date NOT NULL,
-    referral boolean NOT NULL DEFAULT false,
-    referred_by text COLLATE pg_catalog."default",
-    contacted boolean NOT NULL DEFAULT false,
-    status text COLLATE pg_catalog."default" NOT NULL,
-    rejection_date date,
-    comments text COLLATE pg_catalog."default",
-    cover_letter text COLLATE pg_catalog."default",
-    company_id integer NOT NULL,
-    job_id integer NOT NULL,
-    contact_id integer,
-    CONSTRAINT "Application_pkey" PRIMARY KEY (id),
-    CONSTRAINT application_uniq_id UNIQUE (id),
-    CONSTRAINT company_id FOREIGN KEY (company_id)
-        REFERENCES job_tracker.company (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT contact_id FOREIGN KEY (contact_id)
-        REFERENCES job_tracker.contact (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT job_id FOREIGN KEY (job_id)
-        REFERENCES job_tracker.job (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT status_chk CHECK (status = ANY (ARRAY['Applied'::text, 'Callback'::text, 'CodingAssignment'::text, 'Declined'::text, 'Ghosted'::text, 'Interview 1'::text, 'Interview 2'::text, 'Interview 3'::text, 'Rejected'::text, 'Withdrawn'::text]))
-)
+-- DROP TABLE job_tracker.application;
+
+CREATE TABLE job_tracker.application (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	application_date date NOT NULL,
+	referral bool DEFAULT false NOT NULL,
+	referred_by text NULL,
+	contacted bool DEFAULT false NOT NULL,
+	status text NOT NULL,
+	rejection_date date NULL,
+	"comments" text NULL,
+	cover_letter text NULL,
+	company_id int4 NOT NULL,
+	job_id int4 NOT NULL,
+	contact_id int4 NULL,
+	CONSTRAINT "Application_pkey" PRIMARY KEY (id),
+	CONSTRAINT application_uniq_id UNIQUE (id),
+	CONSTRAINT status_chk CHECK ((status = ANY (ARRAY['Applied'::text, 'Callback'::text, 'CodingAssignment'::text, 'Declined'::text, 'Ghosted'::text, 'Interview 1'::text, 'Interview 2'::text, 'Interview 3'::text, 'Rejected'::text, 'Withdrawn'::text]))),
+	CONSTRAINT company_id FOREIGN KEY (company_id) REFERENCES job_tracker.company(id),
+	CONSTRAINT contact_id FOREIGN KEY (contact_id) REFERENCES job_tracker.contact(id),
+	CONSTRAINT job_id FOREIGN KEY (job_id) REFERENCES job_tracker.job(id)
+);
+CREATE INDEX "fki_company-id" ON job_tracker.application USING btree (company_id);
+CREATE INDEX "fki_contact-id" ON job_tracker.application USING btree (contact_id);
+CREATE INDEX fki_contact_id ON job_tracker.application USING btree (id);
+CREATE INDEX "fki_job-id" ON job_tracker.application USING btree (job_id);
+CREATE INDEX fki_job_id ON job_tracker.application USING btree (id);
 
 TABLESPACE pg_default;
 
@@ -82,50 +79,12 @@ COMMENT ON CONSTRAINT application_uniq_id ON job_tracker.application
 
 COMMENT ON CONSTRAINT company_id ON job_tracker.application
     IS 'Unique ID of the company';
+
 COMMENT ON CONSTRAINT contact_id ON job_tracker.application
     IS 'ID for a contact person, if available';
+
 COMMENT ON CONSTRAINT job_id ON job_tracker.application
     IS 'ID of the job being offered';
 
 COMMENT ON CONSTRAINT status_chk ON job_tracker.application
     IS 'Make sure that the status field can only be of certain types';
--- Index: fki_company-id
-
--- DROP INDEX IF EXISTS job_tracker."fki_company-id";
-
-CREATE INDEX IF NOT EXISTS "fki_company-id"
-    ON job_tracker.application USING btree
-    (company_id ASC NULLS LAST)
-    TABLESPACE pg_default;
--- Index: fki_contact-id
-
--- DROP INDEX IF EXISTS job_tracker."fki_contact-id";
-
-CREATE INDEX IF NOT EXISTS "fki_contact-id"
-    ON job_tracker.application USING btree
-    (contact_id ASC NULLS LAST)
-    TABLESPACE pg_default;
--- Index: fki_contact_id
-
--- DROP INDEX IF EXISTS job_tracker.fki_contact_id;
-
-CREATE INDEX IF NOT EXISTS fki_contact_id
-    ON job_tracker.application USING btree
-    (id ASC NULLS LAST)
-    TABLESPACE pg_default;
--- Index: fki_job-id
-
--- DROP INDEX IF EXISTS job_tracker."fki_job-id";
-
-CREATE INDEX IF NOT EXISTS "fki_job-id"
-    ON job_tracker.application USING btree
-    (job_id ASC NULLS LAST)
-    TABLESPACE pg_default;
--- Index: fki_job_id
-
--- DROP INDEX IF EXISTS job_tracker.fki_job_id;
-
-CREATE INDEX IF NOT EXISTS fki_job_id
-    ON job_tracker.application USING btree
-    (id ASC NULLS LAST)
-    TABLESPACE pg_default;
