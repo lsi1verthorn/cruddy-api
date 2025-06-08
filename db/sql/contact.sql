@@ -1,19 +1,20 @@
--- Table: job_tracker.contact
+-- job_tracker.contact definition
 
--- DROP TABLE IF EXISTS job_tracker.contact;
+-- Drop table
 
-CREATE TABLE IF NOT EXISTS job_tracker.contact
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    contact_name text COLLATE pg_catalog."default" NOT NULL,
-    contact_email text COLLATE pg_catalog."default",
-    country_code text COLLATE pg_catalog."default" DEFAULT '+1'::text,
-    phone numeric(10,0),
-    CONSTRAINT "Contact_pkey" PRIMARY KEY (id),
-    CONSTRAINT contact_uniq_id UNIQUE (id)
-        INCLUDE(id),
-    CONSTRAINT email_chk CHECK (email ~* '^[^@]+@[^@]+\.[^@]+$'::text)
-)
+-- DROP TABLE job_tracker.contact;
+
+CREATE TABLE job_tracker.contact (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	contact_name text NOT NULL,
+	contact_email text NULL,
+	country_code text DEFAULT '+1'::text NULL,
+	phone numeric(10) NULL,
+	CONSTRAINT "Contact_pkey" PRIMARY KEY (id),
+	CONSTRAINT "Unique contact name" UNIQUE NULLS NOT DISTINCT (contact_name),
+	CONSTRAINT contact_uniq_id UNIQUE (id) INCLUDE (id),
+	CONSTRAINT email_chk CHECK ((contact_email ~* '^[^@]+@[^@]+\.[^@]+$'::text))
+);
 
 TABLESPACE pg_default;
 

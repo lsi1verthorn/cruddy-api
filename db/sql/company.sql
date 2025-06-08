@@ -1,16 +1,18 @@
--- Table: job_tracker.company
+-- job_tracker.company definition
 
--- DROP TABLE IF EXISTS job_tracker.company;
+-- Drop table
 
-CREATE TABLE IF NOT EXISTS job_tracker.company
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    company_name text COLLATE pg_catalog."default" NOT NULL DEFAULT ''::text,
-    company_website text COLLATE pg_catalog."default",
-    CONSTRAINT "Company_pkey" PRIMARY KEY (id),
-    CONSTRAINT company_uniq_id UNIQUE (id),
-    CONSTRAINT website_chk CHECK (company_website ~* '^(http|https)://[a-zA-Z0-9. -]+\.[a-zA-Z]{2,}$'::text)
-)
+-- DROP TABLE job_tracker.company;
+
+CREATE TABLE job_tracker.company (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	company_name text DEFAULT ''::text NOT NULL,
+	company_website text NULL,
+	CONSTRAINT "Company_pkey" PRIMARY KEY (id),
+	CONSTRAINT "Unique company name" UNIQUE NULLS NOT DISTINCT (company_name),
+	CONSTRAINT company_uniq_id UNIQUE (id),
+	CONSTRAINT website_chk CHECK ((company_website ~* '^(http|https)://[a-zA-Z0-9. -]+\.[a-zA-Z]{2,}$'::text))
+);
 
 TABLESPACE pg_default;
 

@@ -1,24 +1,22 @@
--- Table: job_tracker.job
+-- job_tracker.job definition
 
--- DROP TABLE IF EXISTS job_tracker.job;
+-- Drop table
 
-CREATE TABLE IF NOT EXISTS job_tracker.job
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    title text COLLATE pg_catalog."default" NOT NULL,
-    description text COLLATE pg_catalog."default" DEFAULT ''::text,
-    remote boolean NOT NULL DEFAULT true,
-    salary_range text COLLATE pg_catalog."default" DEFAULT '???'::text,
-    comments text COLLATE pg_catalog."default" DEFAULT ''::text,
-    company_id integer,
-    CONSTRAINT "Job_pkey" PRIMARY KEY (id),
-    CONSTRAINT job_uniq_id UNIQUE (id)
-        INCLUDE(id),
-    CONSTRAINT company_id FOREIGN KEY (company_id)
-        REFERENCES job_tracker.company (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
+-- DROP TABLE job_tracker.job;
+
+CREATE TABLE job_tracker.job (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	title text NOT NULL,
+	description text DEFAULT ''::text NULL,
+	remote bool DEFAULT true NOT NULL,
+	salary_range text DEFAULT '???'::text NULL,
+	"comments" text DEFAULT ''::text NULL,
+	company_id int4 NULL,
+	CONSTRAINT "Job_pkey" PRIMARY KEY (id),
+	CONSTRAINT job_uniq_id UNIQUE (id) INCLUDE (id),
+	CONSTRAINT company_id FOREIGN KEY (company_id) REFERENCES job_tracker.company(id)
+);
+CREATE INDEX fki_company_id ON job_tracker.job USING btree (company_id);
 
 TABLESPACE pg_default;
 
@@ -54,11 +52,3 @@ COMMENT ON CONSTRAINT job_uniq_id ON job_tracker.job
 
 COMMENT ON CONSTRAINT company_id ON job_tracker.job
     IS 'Company id key';
--- Index: fki_company_id
-
--- DROP INDEX IF EXISTS job_tracker.fki_company_id;
-
-CREATE INDEX IF NOT EXISTS fki_company_id
-    ON job_tracker.job USING btree
-    (company_id ASC NULLS LAST)
-    TABLESPACE pg_default;
