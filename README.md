@@ -6,6 +6,8 @@ This is a very basic `express` app for accessing a small `postgres` db locally w
 applications and related information are stored. This is by no-means meant to
 be a complete api, and it lacks some fundamentals like robust error checking and performance tuning.
 
+Note: This service expects a `postgres` instance to be configured and running. See this [link](https://www.atlassian.com/data/sql/how-to-start-a-postgresql-server-on-mac-os-x) for instructions to set one up on a Mac. You might also want to download a DB visualization tool - here is one that I've been using [DBeaver](https://dbeaver.io/download/).
+
 ## Development
 This repo uses `pnpm` and `node`. Download the repo from `git` using your preferred method (`git clone` etc.) and follow these instructions:
 
