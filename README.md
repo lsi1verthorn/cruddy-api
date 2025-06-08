@@ -64,7 +64,7 @@ pnpm run test:jest-rest
 This is a list of items that I would like to complete as time permits:
 
 - [#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Add Test Data
-- [#2](https://github.com/lsi1verthorn/cruddy-api/issues/2) Update DB Schema
+- ~[#2](https://github.com/lsi1verthorn/cruddy-api/issues/2) Update DB Schema~
 - [#3](https://github.com/lsi1verthorn/cruddy-api/issues/3) Spike: Query response data
 - [#4](https://github.com/lsi1verthorn/cruddy-api/issues/4) DRY out / refactor as applicable
 - [#5](https://github.com/lsi1verthorn/cruddy-api/issues/5) Additional documentation
