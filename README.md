@@ -21,17 +21,17 @@ pnpm install
 
 ### Build
 ```bash
-pnpm run build
+pnpm build
 ```
 
 ### Running the service on port 3000
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 ### Lint with  `eslint`
 ```bash
-pnpm run lint
+pnpm lint
 ```
 
 ### Database schema
@@ -54,15 +54,15 @@ node inspect app.js
 From the top level directory
 ```bash
 # Run all unit tests
-pnpm run test
+pnpm test
 ```
 ```bash
 # Run just the `mocha` tests
-pnpm run test:mocha-app
+pnpm test:mocha-app
 ```
 ```bash
 # Run just the `jest` tests
-pnpm run test:jest-rest
+pnpm test:jest-rest
 ```
 
 ## Improvements | Issues | Known Bugs
