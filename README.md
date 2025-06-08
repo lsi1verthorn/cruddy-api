@@ -29,6 +29,11 @@ pnpm run build
 pnpm run dev
 ```
 
+### Lint with  `eslint`
+```bash
+pnpm run lint
+```
+
 ### Database schema
 In the `db/sql` directory, there are four sql files that can be used to create the necessary `postgres` tables:
 
@@ -61,11 +66,6 @@ pnpm run test:jest-rest
 ```
 
 ## Improvements | Issues | Known Bugs
-This is a list of items that I would like to complete as time permits:
+I would like to complete these as time permits:
 
-- [#1](https://github.com/lsi1verthorn/cruddy-api/issues/1) Add Test Data
-- ~[#2](https://github.com/lsi1verthorn/cruddy-api/issues/2) Update DB Schema~
-- [#3](https://github.com/lsi1verthorn/cruddy-api/issues/3) Spike: Query response data
-- [#4](https://github.com/lsi1verthorn/cruddy-api/issues/4) DRY out / refactor as applicable
-- [#5](https://github.com/lsi1verthorn/cruddy-api/issues/5) Additional documentation
-
+[Issues list](https://github.com/lsi1verthorn/cruddy-api/issues)
