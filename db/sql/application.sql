@@ -68,18 +68,3 @@ COMMENT ON COLUMN job_tracker.application.job_id
 
 COMMENT ON COLUMN job_tracker.application.contact_id
     IS 'ID of the contact person, if available';
-
-COMMENT ON CONSTRAINT application_uniq_id ON job_tracker.application
-    IS 'Unique application id';
-
-COMMENT ON CONSTRAINT company_id ON job_tracker.application
-    IS 'Unique ID of the company';
-
-COMMENT ON CONSTRAINT contact_id ON job_tracker.application
-    IS 'ID for a contact person, if available';
-
-COMMENT ON CONSTRAINT job_id ON job_tracker.application
-    IS 'ID of the job being offered';
-
-COMMENT ON CONSTRAINT status_chk ON job_tracker.application
-    IS 'Make sure that the status field can only be of certain types';
