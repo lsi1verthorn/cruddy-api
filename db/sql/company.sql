@@ -14,8 +14,6 @@ CREATE TABLE job_tracker.company (
 	CONSTRAINT website_chk CHECK ((company_website ~* '^(http|https)://[a-zA-Z0-9. -]+\.[a-zA-Z]{2,}$'::text))
 );
 
-TABLESPACE pg_default;
-
 ALTER TABLE IF EXISTS job_tracker.company
     OWNER to postgres;
 
