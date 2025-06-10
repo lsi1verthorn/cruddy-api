@@ -30,11 +30,6 @@ CREATE INDEX fki_contact_id ON job_tracker.application USING btree (id);
 CREATE INDEX "fki_job-id" ON job_tracker.application USING btree (job_id);
 CREATE INDEX fki_job_id ON job_tracker.application USING btree (id);
 
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS job_tracker.application
-    OWNER to postgres;
-
 COMMENT ON TABLE job_tracker.application
     IS 'Information pertaining to the application';
 
