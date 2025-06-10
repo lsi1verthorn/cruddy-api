@@ -18,11 +18,6 @@ CREATE TABLE job_tracker.job (
 );
 CREATE INDEX fki_company_id ON job_tracker.job USING btree (company_id);
 
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS job_tracker.job
-    OWNER to postgres;
-
 COMMENT ON TABLE job_tracker.job
     IS 'Advertised job';
 
@@ -46,9 +41,3 @@ COMMENT ON COLUMN job_tracker.job.comments
 
 COMMENT ON COLUMN job_tracker.job.company_id
     IS 'Company that is offering the job';
-
-COMMENT ON CONSTRAINT job_uniq_id ON job_tracker.job
-    IS 'Unique job id';
-
-COMMENT ON CONSTRAINT company_id ON job_tracker.job
-    IS 'Company id key';
