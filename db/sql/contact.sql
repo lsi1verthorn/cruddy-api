@@ -16,8 +16,6 @@ CREATE TABLE job_tracker.contact (
 	CONSTRAINT email_chk CHECK ((contact_email ~* '^[^@]+@[^@]+\.[^@]+$'::text))
 );
 
-TABLESPACE pg_default;
-
 ALTER TABLE IF EXISTS job_tracker.contact
     OWNER to postgres;
 
