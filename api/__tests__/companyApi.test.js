@@ -28,7 +28,7 @@ describe('Company Routes', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(newCompany);
-      expect(db.create).toHaveBeenCalledWith('company', newCompany);
+      expect(db.create).toHaveBeenCalledWith('job_tracker.company', newCompany);
     });
 
     it('should handle errors during company creation', async () => {
@@ -51,7 +51,7 @@ describe('Company Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(company);
-      expect(db.read).toHaveBeenCalledWith('company', '1');
+      expect(db.read).toHaveBeenCalledWith('job_tracker.company', '1');
     });
 
     it('should return 404 if company not found', async () => {
@@ -83,7 +83,7 @@ describe('Company Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(updatedCompany);
-      expect(db.update).toHaveBeenCalledWith('company', '1', { name: 'Globex Corp' });
+      expect(db.update).toHaveBeenCalledWith('job_tracker.company', '1', { name: 'Globex Corp' });
     });
 
     it('should return 404 if company not found during update', async () => {
@@ -115,7 +115,7 @@ describe('Company Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(deletedCompany);
-      expect(db.remove).toHaveBeenCalledWith('company', '1');
+      expect(db.remove).toHaveBeenCalledWith('job_tracker.company', '1');
     });
 
     it('should return 404 if company not found during delete', async () => {
@@ -147,7 +147,7 @@ describe('Company Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(companies);
-      expect(db.list).toHaveBeenCalledWith('company');
+      expect(db.list).toHaveBeenCalledWith('job_tracker.company', 'company_name');
     });
 
     it('should handle errors during company listing', async () => {

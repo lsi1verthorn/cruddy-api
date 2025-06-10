@@ -4,7 +4,7 @@ const db = require('../db/db');
 
 router.post('/', async (req, res) => {
   try {
-    const newApplication = await db.create('application', req.body);
+    const newApplication = await db.create('job_tracker.application', req.body);
 
     res.status(201).json(newApplication);
   } catch (err) {
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const application = await db.read('application', req.params.id);
+    const application = await db.read('job_tracker.application', req.params.id);
 
     if (!application) {
       return res.status(404).json({ error: 'Application not found' });
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   try {
-    const updatedApplication = await db.update('application', req.params.id, req.body);
+    const updatedApplication = await db.update('job_tracker.application', req.params.id, req.body);
 
     if (!updatedApplication) {
       return res.status(404).json({ error: 'Application not found' });
@@ -42,7 +42,7 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedApplication = await db.remove('application', req.params.id);
+    const deletedApplication = await db.remove('job_tracker.application', req.params.id);
 
     if (!deletedApplication) {
       return res.status(404).json({ error: 'Application not found' });
@@ -79,7 +79,7 @@ router.get('/', async (req, res) => {
   ];
 
   try {
-    const applications = await db.innerjoin('application', data, fk);
+    const applications = await db.innerjoin('job_tracker.application', data, fk);
 
     res.json(applications);
   } catch(err){

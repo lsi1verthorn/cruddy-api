@@ -28,7 +28,7 @@ describe('Contact Routes', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(newContact);
-      expect(db.create).toHaveBeenCalledWith('contact', newContact);
+      expect(db.create).toHaveBeenCalledWith('job_tracker.contact', newContact);
     });
 
     it('should handle errors during contact creation', async () => {
@@ -51,7 +51,7 @@ describe('Contact Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(contact);
-      expect(db.read).toHaveBeenCalledWith('contact', '1');
+      expect(db.read).toHaveBeenCalledWith('job_tracker.contact', '1');
     });
 
     it('should return 404 if contact not found', async () => {
@@ -83,7 +83,7 @@ describe('Contact Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(updatedContact);
-      expect(db.update).toHaveBeenCalledWith('contact', '1', { name: 'Jane Doe' });
+      expect(db.update).toHaveBeenCalledWith('job_tracker.contact', '1', { name: 'Jane Doe' });
     });
 
     it('should return 404 if contact not found during update', async () => {
@@ -115,7 +115,7 @@ describe('Contact Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(deletedContact);
-      expect(db.remove).toHaveBeenCalledWith('contact', '1');
+      expect(db.remove).toHaveBeenCalledWith('job_tracker.contact', '1');
     });
 
     it('should return 404 if contact not found during delete', async () => {
@@ -147,7 +147,7 @@ describe('Contact Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(contacts);
-      expect(db.list).toHaveBeenCalledWith('contact');
+      expect(db.list).toHaveBeenCalledWith('job_tracker.contact', 'contact_name');
     });
 
     it('should handle errors during contact listing', async () => {

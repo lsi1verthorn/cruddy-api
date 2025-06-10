@@ -4,7 +4,7 @@ const db = require('../db/db');
 
 router.post('/', async (req, res) => {
   try {
-    const newCompany = await db.create('company', req.body);
+    const newCompany = await db.create('job_tracker.company', req.body);
 
     res.status(201).json(newCompany);
   } catch (err) {
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const company = await db.read('company', req.params.id);
+    const company = await db.read('job_tracker.company', req.params.id);
 
     if (!company) {
       return res.status(404).json({ error: 'Company not found' });
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const updatedCompany = await db.update('company', req.params.id, req.body);
+    const updatedCompany = await db.update('job_tracker.company', req.params.id, req.body);
 
     if (!updatedCompany) {
       return res.status(404).json({ error: 'Company not found' });
@@ -42,7 +42,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedCompany = await db.remove('company', req.params.id);
+    const deletedCompany = await db.remove('job_tracker.company', req.params.id);
 
     if (!deletedCompany) {
       return res.status(404).json({ error: 'Company not found' });
@@ -56,7 +56,7 @@ router.delete('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const companies = await db.list('company');
+    const companies = await db.list('job_tracker.company', 'company_name');
 
     res.json(companies);
   } catch(err){
