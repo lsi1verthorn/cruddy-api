@@ -14,12 +14,6 @@ CREATE TABLE job_tracker.company (
 	CONSTRAINT website_chk CHECK ((company_website ~* '^(http|https)://[a-zA-Z0-9. -]+\.[a-zA-Z]{2,}$'::text))
 );
 
-ALTER TABLE IF EXISTS job_tracker.company
-    OWNER to postgres;
-
-ALTER TABLE IF EXISTS job_tracker.company
-    ADD CONSTRAINT company_name_unique UNIQUE (company_name);
-
 COMMENT ON TABLE job_tracker.company
     IS 'Information about the company with the job opening';
 
@@ -31,9 +25,3 @@ COMMENT ON COLUMN job_tracker.company.company_name
 
 COMMENT ON COLUMN job_tracker.company.company_website
     IS 'Website url if available';
-
-COMMENT ON CONSTRAINT company_uniq_id ON job_tracker.company
-    IS 'Company id is unique';
-
-COMMENT ON CONSTRAINT website_chk ON job_tracker.company
-    IS 'Validate url';
