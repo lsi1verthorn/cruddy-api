@@ -62,8 +62,8 @@ async function remove(table, id) {
   return result.rows[0];
 }
 
-async function list(table) {
-  const queryText = `SELECT * FROM ${table}`;
+async function list(table, orderBy='id') {
+  const queryText = `SELECT * FROM ${table} ORDER BY ${orderBy}`;
 
   const result = await query(queryText, []);
 

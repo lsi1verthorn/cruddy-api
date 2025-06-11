@@ -28,7 +28,7 @@ describe('Application Routes', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(newApplication);
-      expect(db.create).toHaveBeenCalledWith('application', newApplication);
+      expect(db.create).toHaveBeenCalledWith('job_tracker.application', newApplication);
     });
 
     it('should handle errors during application creation', async () => {
@@ -51,7 +51,7 @@ describe('Application Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(application);
-      expect(db.read).toHaveBeenCalledWith('application', '1');
+      expect(db.read).toHaveBeenCalledWith('job_tracker.application', '1');
     });
 
     it('should return 404 if application not found', async () => {
@@ -83,7 +83,7 @@ describe('Application Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(updatedApplication);
-      expect(db.update).toHaveBeenCalledWith('application', '1', { application_date: '2023-10-27' });
+      expect(db.update).toHaveBeenCalledWith('job_tracker.application', '1', { application_date: '2023-10-27' });
     });
 
     it('should return 404 if application not found during update', async () => {
@@ -115,7 +115,7 @@ describe('Application Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(deletedApplication);
-      expect(db.remove).toHaveBeenCalledWith('application', '1');
+      expect(db.remove).toHaveBeenCalledWith('job_tracker.application', '1');
     });
 
     it('should return 404 if application not found during delete', async () => {
@@ -147,7 +147,7 @@ describe('Application Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(applications);
-      expect(db.innerjoin).toHaveBeenCalledWith('application',
+      expect(db.innerjoin).toHaveBeenCalledWith('job_tracker.application',
         [
           'application.id',
           'application.application_date',

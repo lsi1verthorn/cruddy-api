@@ -4,7 +4,7 @@ const db = require('../db/db');
 
 router.post('/', async (req, res) => {
   try {
-    const newJob = await db.create('job', req.body);
+    const newJob = await db.create('job_tracker.job', req.body);
 
     res.status(201).json(newJob);
   } catch (err) {
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const job = await db.read('job', req.params.id);
+    const job = await db.read('job_tracker.job', req.params.id);
 
     if (!job) {
       return res.status(404).json({ error: 'Job not found' });
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const updatedJob = await db.update('job', req.params.id, req.body);
+    const updatedJob = await db.update('job_tracker.job', req.params.id, req.body);
 
     if (!updatedJob) {
       return res.status(404).json({ error: 'Job not found' });
@@ -42,7 +42,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedJob = await db.remove('job', req.params.id);
+    const deletedJob = await db.remove('job_tracker.job', req.params.id);
 
     if (!deletedJob) {
       return res.status(404).json({ error: 'Job not found' });
@@ -71,7 +71,7 @@ router.get('/', async (req, res) => {
   ];
 
   try {
-    const jobs = await db.innerjoin('job', data, fk);
+    const jobs = await db.innerjoin('job_tracker.job', data, fk);
 
     res.json(jobs);
   } catch(err){

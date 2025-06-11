@@ -28,7 +28,7 @@ describe('Job Routes', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(newJob);
-      expect(db.create).toHaveBeenCalledWith('job', newJob);
+      expect(db.create).toHaveBeenCalledWith('job_tracker.job', newJob);
     });
 
     it('should handle errors during job creation', async () => {
@@ -51,7 +51,7 @@ describe('Job Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(job);
-      expect(db.read).toHaveBeenCalledWith('job', '1');
+      expect(db.read).toHaveBeenCalledWith('job_tracker.job', '1');
     });
 
     it('should return 404 if job not found', async () => {
@@ -83,7 +83,7 @@ describe('Job Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(updatedJob);
-      expect(db.update).toHaveBeenCalledWith('job', '1', { title: 'Senior Software Engineer' });
+      expect(db.update).toHaveBeenCalledWith('job_tracker.job', '1', { title: 'Senior Software Engineer' });
     });
 
     it('should return 404 if job not found during update', async () => {
@@ -115,7 +115,7 @@ describe('Job Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(deletedJob);
-      expect(db.remove).toHaveBeenCalledWith('job', '1');
+      expect(db.remove).toHaveBeenCalledWith('job_tracker.job', '1');
     });
 
     it('should return 404 if job not found during delete', async () => {
@@ -147,7 +147,7 @@ describe('Job Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(jobs);
-      expect(db.innerjoin).toHaveBeenCalledWith('job',
+      expect(db.innerjoin).toHaveBeenCalledWith('job_tracker.job',
         [
           'job.id',
           'job.title',

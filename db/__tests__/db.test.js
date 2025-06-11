@@ -95,7 +95,7 @@ describe('CRUD operations', () => {
 
     const result = await list(table);
     expect(result).toEqual(expectedResult);
-    expect(client.query).toHaveBeenCalledWith('SELECT * FROM test_table', []);
+    expect(client.query).toHaveBeenCalledWith('SELECT * FROM test_table ORDER BY id', []);
   });
 
     it('Should handle query errors', async () => {

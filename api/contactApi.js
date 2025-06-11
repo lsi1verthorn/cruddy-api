@@ -4,7 +4,7 @@ const db = require('../db/db');
 
 router.post('/', async (req, res) => {
   try {
-    const newContact = await db.create('contact', req.body);
+    const newContact = await db.create('job_tracker.contact', req.body);
 
     res.status(201).json(newContact);
   } catch (err) {
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const contact = await db.read('contact', req.params.id);
+    const contact = await db.read('job_tracker.contact', req.params.id);
 
     if (!contact) {
       return res.status(404).json({ error: 'Contact not found' });
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const updatedContact = await db.update('contact', req.params.id, req.body);
+    const updatedContact = await db.update('job_tracker.contact', req.params.id, req.body);
 
     if (!updatedContact) {
       return res.status(404).json({ error: 'Contact not found' });
@@ -42,7 +42,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedContact = await db.remove('contact', req.params.id);
+    const deletedContact = await db.remove('job_tracker.contact', req.params.id);
 
     if (!deletedContact) {
       return res.status(404).json({ error: 'Contact not found' });
@@ -56,7 +56,7 @@ router.delete('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const contacts = await db.list('contact');
+    const contacts = await db.list('job_tracker.contact', 'contact_name');
 
     res.json(contacts);
   } catch(err){
