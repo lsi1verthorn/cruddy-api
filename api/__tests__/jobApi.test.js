@@ -159,7 +159,7 @@ describe('Job Routes', () => {
           'company.company_name',
         ],
         [
-          {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'company', 'table': 'job'}
+          {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'job_tracker.company', 'table': 'job'}
         ],
       );
     });
