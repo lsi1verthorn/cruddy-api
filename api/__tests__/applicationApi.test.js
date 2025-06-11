@@ -165,8 +165,8 @@ describe('Application Routes', () => {
           'job.title',
         ],
         [
-          {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'company', 'table': 'application'},
-          {'fk': 'job_id', 'pk': 'id', 'relatedTable': 'job', 'table': 'application'}
+          {'fk': 'company_id', 'pk': 'id', 'relatedTable': 'job_tracker.company', 'table': 'application'},
+          {'fk': 'job_id', 'pk': 'id', 'relatedTable': 'job_tracker.job', 'table': 'application'}
         ],
       );
     });
