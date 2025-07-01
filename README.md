@@ -66,6 +66,4 @@ pnpm test:jest-rest
 ```
 
 ## Improvements | Issues | Known Bugs
-I would like to complete these as time permits:
-
 [Issues list](https://github.com/lsi1verthorn/cruddy-api/issues)
